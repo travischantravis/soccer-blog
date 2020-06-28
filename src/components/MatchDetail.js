@@ -1,11 +1,15 @@
 import React from "react";
 
-const MatchDetail = (data) => {
-  const { team, uid } = data.location.state;
+const MatchDetail = (props) => {
+  const matchData = props.location.state;
+  console.log(matchData);
   return (
     <div>
-      <p>Chelsea 2 - 1 {team}</p>
-      <p className="text-muted">25 Jun 2020</p>
+      <p>
+        {matchData.home} {matchData.home_goal} - {matchData.away_goal}{" "}
+        {matchData.away}
+      </p>
+      <p className="text-muted">{matchData.id} Jun 2020</p>
       <p>Premier League Week 31</p>
       <p>MOTM: Pulisic</p>
     </div>

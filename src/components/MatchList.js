@@ -1,26 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import MatchSummary from "./MatchSummary";
 import MatchDetail from "./MatchDetail";
 
-const data = [
-  {
-    team: "Man City",
-    uid: 10,
-  },
-  {
-    team: "Arsenal",
-    uid: 11,
-  },
-];
-
 const MatchList = () => {
+  const [match, setMatch] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/matches/all")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setMatch(data);
+      });
+    console.log(match);
+  }, []);
+
   return (
     <div className="">
       <h5>Match List</h5>
 
-      {data.map((d) => {
-        return <MatchSummary data={d} key={d.uid} />;
+      {match.map((d, i) => {
+        return <MatchSummary data={d} key={i} />;
       })}
     </div>
   );
