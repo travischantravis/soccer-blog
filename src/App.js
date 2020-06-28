@@ -1,13 +1,16 @@
-import React from "react";
-import logo from "./logo.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import PlayerList from "./components/PlayerList";
+
+import React from "react";
+import Main from "./Main";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <p>test</p>
-      <PlayerList></PlayerList>
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
     </div>
   );
 }
