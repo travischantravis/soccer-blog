@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
-import MatchDetail from "./MatchDetail";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 const MatchSummary = (props) => {
   const matchData = props.data;
   // console.log(matchData);
   return (
-    <div>
+    <div className="mb-3">
       <Link
         to={{ pathname: "/match/" + matchData.id, state: matchData }}
         style={{ textDecoration: "none", color: "black" }}
@@ -17,7 +17,9 @@ const MatchSummary = (props) => {
         </p>
       </Link>
 
-      <p className="text-muted">{matchData.id} Jun 2020</p>
+      <p className="text-muted">
+        {moment.utc(matchData.date._seconds, "X").format("MMM Do")}
+      </p>
     </div>
   );
 };

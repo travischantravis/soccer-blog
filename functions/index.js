@@ -17,7 +17,7 @@ app.get("/test", (req, res) => {
   res.send("testing success!");
 });
 
-// [Debug] GET individual data from Firestore, passing @documentId
+// [Debug] GET individual matcg from Firestore
 app.get("/api/match/:matchId", (req, res) => {
   const { matchId } = req.params;
   db.collection("match")
@@ -29,10 +29,29 @@ app.get("/api/match/:matchId", (req, res) => {
     });
 });
 
+// [Debug] GET individual players from Firestore
+app.get("/api/player/:docId", (req, res) => {
+  const { docId } = req.params;
+  db.collection("players")
+    .doc(docId)
+    .get()
+    .then((doc) => res.send(doc.data()))
+    .catch((err) => {
+      console.log("Error getting documents", err);
+    });
+});
+
 // GET all matches
 app.get("/api/matches/all", async (req, res) => {
-  const snapshot = await db.collection("match").get();
+  const snapshot = await db.collection("match").orderBy("date", "desc").get();
+  res.send(snapshot.docs.map((doc) => doc.data()));
+});
+
+// GET all players
+app.get("/api/players/all", async (req, res) => {
+  const snapshot = await db.collection("players").get();
   res.send(snapshot.docs.map((doc) => doc.data()));
 });
 
 exports.app = functions.https.onRequest(app);
+// soccer-blog-723a1.firebaseapp.com

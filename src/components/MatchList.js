@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
 import MatchSummary from "./MatchSummary";
-import MatchDetail from "./MatchDetail";
 
 const MatchList = () => {
-  const [match, setMatch] = useState([]);
+  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     fetch("/api/matches/all")
@@ -12,16 +10,16 @@ const MatchList = () => {
         return response.json();
       })
       .then((data) => {
-        setMatch(data);
+        setMatches(data);
       });
-    console.log(match);
+    // console.log(match);
   }, []);
 
   return (
     <div className="">
-      <h5>Match List</h5>
+      <h5>Most recent matches of Chelsea</h5>
 
-      {match.map((d, i) => {
+      {matches.map((d, i) => {
         return <MatchSummary data={d} key={i} />;
       })}
     </div>
