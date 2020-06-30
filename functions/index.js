@@ -47,12 +47,33 @@ app.get("/api/matches/all", async (req, res) => {
   res.send(snapshot.docs.map((doc) => doc.data()));
 });
 
-// GET all players in an individual match
+// GET information of all players in an individual match
 app.get("/api/match/:id/squad", async (req, res) => {
   const { id } = req.params;
   console.log(id);
-  const snapshot = await db.collection("match/" + id + "/chelsea_squad").get();
-  res.send(snapshot.docs.map((doc) => doc.data()));
+
+  // 1. GET all players in an individual match
+  const squadCommentRef = await db
+    .collection("match/" + id + "/chelsea_squad")
+    .get();
+  const squadComment = squadCommentRef.docs.map((doc) => doc.data());
+
+  // 2. GET basic information of the players presented in the match
+  const playerCombinedInfo = await Promise.all(
+    squadComment.map(async (d) => {
+      const playerInfoRef = await db
+        .collection("players/")
+        .doc(d.player_id)
+        .get();
+
+      const playerInfo = playerInfoRef.data();
+
+      // 3. Combine the two objects
+      return Object.assign(d, playerInfo);
+    })
+  );
+
+  res.send(playerCombinedInfo);
 });
 
 // GET all players
