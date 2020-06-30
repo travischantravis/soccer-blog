@@ -47,6 +47,14 @@ app.get("/api/matches/all", async (req, res) => {
   res.send(snapshot.docs.map((doc) => doc.data()));
 });
 
+// GET all players in an individual match
+app.get("/api/match/:id/squad", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const snapshot = await db.collection("match/" + id + "/chelsea_squad").get();
+  res.send(snapshot.docs.map((doc) => doc.data()));
+});
+
 // GET all players
 app.get("/api/players/all", async (req, res) => {
   const snapshot = await db.collection("players").get();

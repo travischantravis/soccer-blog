@@ -3,25 +3,41 @@ import moment from "moment";
 
 const MatchDetail = (props) => {
   const [players, setPlayers] = useState([]);
+  const [squad, setSquad] = useState([]);
+  let playerIdList;
+
   const matchData = props.location.state;
+  const matchId = matchData.id;
   console.log(matchData);
 
   useEffect(() => {
-    fetch("/api/players/all")
+    fetch("/api/match/" + matchId + "/squad")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setPlayers(data);
+        setSquad(data);
       });
   }, []);
 
-  console.log(players);
+  console.log(squad);
+  playerIdList = squad.map((d) => d.player_id);
+
+  console.log(playerIdList);
+  useEffect(() => {
+    fetch("/api/match/" + matchId + "/squad")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setSquad(data);
+      });
+  }, []);
 
   return (
     <div>
       <h2>
-        {matchData.home} {matchData.home_goal} - {matchData.away_goal}{" "}
+        {matchData.home} {matchData.home_goal} - {matchData.away_goal}
         {matchData.away}
       </h2>
       <p>{matchData.event}</p>
@@ -31,14 +47,14 @@ const MatchDetail = (props) => {
       <p>{matchData.comment}</p>
 
       <h3 className="mt-3">Player Comments</h3>
-      {players.map((player, i) => {
+      {/* {players.map((player, i) => {
         return (
           <div key={i} className="my-2">
             <img src={player.image} alt={player.name} className="player-pic" />
             <span>{player.name}</span>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };
