@@ -73,7 +73,8 @@ app.get("/api/match/:id/squad", async (req, res) => {
     })
   );
 
-  res.send(playerCombinedInfo);
+  // Sort according to name
+  res.send(playerCombinedInfo.sort((a, b) => (a.name > b.name ? 1 : -1)));
 });
 
 // GET all players

@@ -3,8 +3,6 @@ import moment from "moment";
 
 const MatchDetail = (props) => {
   const [playersInfo, setPlayersInfo] = useState([]);
-  //const [squad, setSquad] = useState([]);
-  //let playerIdList;
 
   const matchData = props.location.state;
   const matchId = matchData.id;
@@ -30,11 +28,11 @@ const MatchDetail = (props) => {
       </h2>
       <p>{matchData.event}</p>
       <p className="text-muted">
-        {moment.utc(matchData.date._seconds, "X").format("MMM Do")}
+        {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
       </p>
       <p>{matchData.comment}</p>
 
-      <h3 className="mt-3">My comments on players</h3>
+      <h3 className="mt-3">My rating on players</h3>
       {playersInfo.map((player, i) => {
         return (
           <div key={i} className="my-2 row">
@@ -44,8 +42,8 @@ const MatchDetail = (props) => {
               className="player-pic col-1"
             />
             <span className="col-2">{player.name}</span>
-            <span className="col-1">{player.rating}/10</span>
-            <span className="col-6">{player.comment}</span>
+            <span className="col-1">{player.rating || "-"}/10</span>
+            <span className="col-6">{player.comment || "-"}</span>
           </div>
         );
       })}

@@ -18,7 +18,7 @@ const MatchSummary = (props) => {
       </Link>
 
       <p className="text-muted">
-        {moment.utc(matchData.date._seconds, "X").format("MMM Do")}
+        {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
       </p>
     </div>
   );
