@@ -22,28 +22,28 @@ const MatchDetail = (props) => {
 
   return (
     <div>
-      <h2>
+      <h2 className="row">
         {matchData.home} {matchData.home_goal} - {matchData.away_goal}{" "}
         {matchData.away}
       </h2>
-      <p>{matchData.event}</p>
-      <p className="text-muted">
+      <p className="row">{matchData.event}</p>
+      <p className="text-muted row">
         {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
       </p>
-      <p>{matchData.comment}</p>
+      <p className="row">{matchData.comment}</p>
 
-      <h3 className="mt-3">My rating on players</h3>
+      <h3 className="mt-3 row">My rating on players</h3>
       {playersInfo.map((player, i) => {
         return (
           <div key={i} className="my-2 row">
             <img
               src={player.image}
               alt={player.name}
-              className="player-pic col-1"
+              className="player-pic col-2 col-md-2"
             />
-            <span className="col-2">{player.name}</span>
-            <span className="col-1">{player.rating || "-"}/10</span>
-            <span className="col-6">{player.comment || "-"}</span>
+            <span className="col-5 col-md-2">{player.name}</span>
+            <span className="col-3 col-md-1">{player.rating || "-"}/10</span>
+            <span className="col-md-7">{player.comment || "-"}</span>
           </div>
         );
       })}
