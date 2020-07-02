@@ -29,16 +29,49 @@ app.get("/api/match/:matchId", (req, res) => {
     });
 });
 
-// [Debug] GET individual players from Firestore
-app.get("/api/player/:docId", (req, res) => {
-  const { docId } = req.params;
-  db.collection("players")
-    .doc(docId)
-    .get()
-    .then((doc) => res.send(doc.data()))
-    .catch((err) => {
-      console.log("Error getting documents", err);
-    });
+// GET individual players with all their match comments
+app.get("/api/player/detail/:uid", async (req, res) => {
+  const { uid } = req.params;
+
+  // 1. GET basic information
+  try {
+    const basicInfoRef = await db.collection("players").doc(uid).get();
+    const basicInfo = basicInfoRef.data();
+
+    // 2. GET all the player's comments
+    const querySnapshots = await db
+      .collectionGroup("chelsea_squad")
+      .where("player_id", "==", uid)
+      .get();
+
+    const combinedCommentInfo = await Promise.all(
+      querySnapshots.docs.map(async (d) => {
+        let matchComment = d.data();
+
+        // 3. GET corresponding match info
+        const matchInfoRef = await db
+          .collection("match")
+          .doc(matchComment.match_id)
+          .get();
+        const matchInfo = matchInfoRef.data();
+
+        // 4. Combine player comment with match info
+        const matchAllInfo = Object.assign(matchComment, matchInfo);
+
+        return matchAllInfo;
+      })
+    );
+
+    // 5. Combine all info
+    let allInfo = {
+      basic: basicInfo,
+      comments: combinedCommentInfo,
+    };
+
+    res.send(allInfo);
+  } catch (err) {
+    console.log("Error getting documents", err);
+  }
 });
 
 // GET all matches
@@ -50,7 +83,6 @@ app.get("/api/matches/all", async (req, res) => {
 // GET information of all players in an individual match
 app.get("/api/match/:id/squad", async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   // 1. GET all players in an individual match
   const squadCommentRef = await db
@@ -73,7 +105,7 @@ app.get("/api/match/:id/squad", async (req, res) => {
     })
   );
 
-  // Sort according to name
+  // 4. Sort according to name
   res.send(playerCombinedInfo.sort((a, b) => (a.name > b.name ? 1 : -1)));
 });
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
 const MatchDetail = (props) => {
@@ -6,7 +7,7 @@ const MatchDetail = (props) => {
 
   const matchData = props.location.state;
   const matchId = matchData.id;
-  console.log(matchData);
+  // console.log(matchData);
 
   useEffect(() => {
     fetch("/api/match/" + matchId + "/squad")
@@ -18,7 +19,7 @@ const MatchDetail = (props) => {
       });
   }, []);
 
-  console.log(playersInfo);
+  // console.log(playersInfo);
 
   return (
     <div>
@@ -30,7 +31,7 @@ const MatchDetail = (props) => {
       <p className="text-muted row">
         {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
       </p>
-      <p className="row">{matchData.comment}</p>
+      <p className="row">{matchData.match_comment}</p>
 
       <h3 className="mt-3 row">My rating on players</h3>
       {playersInfo.map((player, i) => {
@@ -41,7 +42,14 @@ const MatchDetail = (props) => {
               alt={player.name}
               className="player-pic col-2 col-md-2"
             />
-            <span className="col-5 col-md-2">{player.name}</span>
+            <Link
+              to={{ pathname: "/player/" + player.player_id, state: player }}
+              style={{ textDecoration: "none", color: "black" }}
+              className="col-5 col-md-2"
+            >
+              {player.name}
+            </Link>
+
             <span className="col-3 col-md-1">{player.rating || "-"}/10</span>
             <span className="col-md-7">{player.comment || "-"}</span>
           </div>

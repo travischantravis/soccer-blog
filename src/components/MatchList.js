@@ -16,8 +16,8 @@ const MatchList = () => {
   }, []);
 
   return (
-    <div className="">
-      <h5>Most recent matches of Chelsea</h5>
+    <div>
+      <h5 className="row">Most recent matches of Chelsea</h5>
 
       {matches.map((d, i) => {
         return <MatchSummary data={d} key={i} />;

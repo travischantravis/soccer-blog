@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import MatchDetail from "./components/MatchDetail";
+import PlayerDetail from "./components/PlayerDetail";
 import Home from "./components/Home";
 
 const Main = () => {
@@ -9,6 +10,7 @@ const Main = () => {
     <div className="container">
       <Route exact path="/" render={(props) => <Home />} />
       <Route path={"/match/:uid"} component={MatchDetail}></Route>
+      <Route path={"/player/:uid"} component={PlayerDetail}></Route>
     </div>
   );
 };
