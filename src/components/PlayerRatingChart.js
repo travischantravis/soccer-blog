@@ -2,7 +2,6 @@ import React from "react";
 import {
   VictoryLine,
   VictoryChart,
-  VictoryContainer,
   VictoryScatter,
   VictoryLabel,
   VictoryAxis,
@@ -11,18 +10,18 @@ import {
 } from "victory";
 import moment from "moment";
 
-const CustomLabel = (props) => {
-  const { active } = props;
-  console.log(props);
-  const style = {
-    fill: "black",
-    textAnchor: "middle",
-    fontSize: 12,
-  };
-  return active ? (
-    <VictoryLabel text="test" style={style} x={175} y={175} renderInPortal />
-  ) : null;
-};
+// const CustomLabel = (props) => {
+//   const { active } = props;
+//   console.log(props);
+//   const style = {
+//     fill: "black",
+//     textAnchor: "middle",
+//     fontSize: 12,
+//   };
+//   return active ? (
+//     <VictoryLabel text="test" style={style} x={175} y={175} renderInPortal />
+//   ) : null;
+// };
 
 const PlayerRatingChart = (props) => {
   let data = props.data.comments;
@@ -46,7 +45,7 @@ const PlayerRatingChart = (props) => {
           labels={({ datum }) => datum.rating}
           labelComponent={<VictoryTooltip dy={-7} constrainToVisibleArea />}
           responsive={false}
-          voronoiBlacklist={["scatterDots"]}
+          voronoiBlacklist={["line1"]}
         />
       }
       width={400}
@@ -84,6 +83,7 @@ const PlayerRatingChart = (props) => {
       ]}
     >
       <VictoryLine
+        name="line1"
         data={data}
         x={(d) => moment.utc(d.date._seconds, "X").format("MMM D")}
         y={(d) => d.rating}
@@ -99,8 +99,12 @@ const PlayerRatingChart = (props) => {
         data={data}
         x={(d) => moment.utc(d.date._seconds, "X").format("MMM D")}
         y={(d) => d.rating}
-        size={4}
-        style={{ data: { fill: "black" } }}
+        size={({ active }) => {
+          return active ? 6 : 4;
+        }}
+        style={{
+          data: { fill: ({ active }) => (active ? "#034694" : "black") },
+        }}
       />
 
       <VictoryLabel
