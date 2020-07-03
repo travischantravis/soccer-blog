@@ -39,7 +39,7 @@ const MatchDetail = (props) => {
       <h3 className="mt-3 row">My rating on players</h3>
 
       {isLoading ? (
-        <Placeholder count={4} />
+        <Placeholder count={4} type="match" />
       ) : (
         playersInfo.map((player, i) => {
           return (

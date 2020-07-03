@@ -20,14 +20,20 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  // console.log(player);
+  console.log(player);
 
   return (
     <div>
-      <h2>{player.basic.name}</h2>
-      {isLoading ? <Placeholder /> : <PlayerRatingChart data={player} />}
+      <div>
+        <h2>{player.basic.name}</h2>
+        {isLoading ? (
+          <Placeholder type="match" />
+        ) : (
+          <PlayerRatingChart data={player} />
+        )}
+      </div>
       {isLoading ? (
-        <Placeholder />
+        <Placeholder type="match" />
       ) : (
         player.comments.map((d, i) => {
           return (

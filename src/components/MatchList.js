@@ -23,7 +23,7 @@ const MatchList = () => {
     <div>
       <h5 className="row">Most recent matches of Chelsea</h5>
       {isLoading ? (
-        <Placeholder count={3} />
+        <Placeholder count={3} type="match" />
       ) : (
         matches.map((d, i) => {
           return <MatchSummary data={d} key={i} />;
