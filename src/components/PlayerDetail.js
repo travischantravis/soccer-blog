@@ -20,7 +20,7 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  // console.log(player);
+  console.log(player);
 
   return (
     <div>
@@ -31,11 +31,15 @@ const PlayerDetail = (props) => {
       ) : (
         player.comments.map((d, i) => {
           return (
-            <div key={i} className="mb-2">
-              <p>
+            <div key={i} className="mb-3">
+              <span>
                 {d.date &&
                   moment.utc(d.date._seconds, "X").format("MMM D, YYYY")}
-              </p>
+              </span>
+              {"  "}
+              <span className="text-muted">
+                [{d.home} {d.home_goal} - {d.away_goal} {d.away}]
+              </span>
               <p>{d.rating}/10</p>
               <p>{d.comment}</p>
             </div>
