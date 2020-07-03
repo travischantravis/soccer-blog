@@ -24,34 +24,47 @@ const PlayerDetail = (props) => {
 
   return (
     <div>
-      <div>
-        <h2>{player.basic.name}</h2>
-        {isLoading ? (
-          <Placeholder type="match" />
-        ) : (
-          <PlayerRatingChart data={player} />
-        )}
+      <div className="row">
+        <div className="col-md-4">
+          {isLoading ? (
+            <Placeholder />
+          ) : (
+            <img
+              src={player.basic.image.replace("40x40", "110x140")}
+              alt="image"
+            />
+          )}
+          <h2>{player.basic.name}</h2>
+          {isLoading ? (
+            <Placeholder type="match" />
+          ) : (
+            <PlayerRatingChart data={player} />
+          )}
+        </div>
+        <div className="col-md-8">
+          <h4>Player comments</h4>
+          {isLoading ? (
+            <Placeholder type="match" />
+          ) : (
+            player.comments.map((d, i) => {
+              return (
+                <div key={i} className="mb-3">
+                  <span>
+                    {d.date &&
+                      moment.utc(d.date._seconds, "X").format("MMM D, YYYY")}
+                  </span>
+                  {"  "}
+                  <span className="text-muted">
+                    [{d.home} {d.home_goal} - {d.away_goal} {d.away}]
+                  </span>
+                  <p>{d.rating}/10</p>
+                  <p>{d.comment}</p>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
-      {isLoading ? (
-        <Placeholder type="match" />
-      ) : (
-        player.comments.map((d, i) => {
-          return (
-            <div key={i} className="mb-3">
-              <span>
-                {d.date &&
-                  moment.utc(d.date._seconds, "X").format("MMM D, YYYY")}
-              </span>
-              {"  "}
-              <span className="text-muted">
-                [{d.home} {d.home_goal} - {d.away_goal} {d.away}]
-              </span>
-              <p>{d.rating}/10</p>
-              <p>{d.comment}</p>
-            </div>
-          );
-        })
-      )}
     </div>
   );
 };

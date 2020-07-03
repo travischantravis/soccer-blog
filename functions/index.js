@@ -62,10 +62,15 @@ app.get("/api/player/detail/:uid", async (req, res) => {
       })
     );
 
-    // 5. Combine all info
+    // 5. Sort in descending date
+    const _combinedCommentInfo = await combinedCommentInfo.sort((a, b) =>
+      a.date._seconds < b.date._seconds ? 1 : -1
+    );
+
+    // 6. Combine all info
     let allInfo = {
       basic: basicInfo,
-      comments: combinedCommentInfo,
+      comments: _combinedCommentInfo,
     };
 
     res.send(allInfo);
