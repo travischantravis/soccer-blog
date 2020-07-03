@@ -6,12 +6,28 @@ import {
   VictoryScatter,
   VictoryLabel,
   VictoryAxis,
+  VictoryVoronoiContainer,
+  VictoryTooltip,
 } from "victory";
 import moment from "moment";
 
+const CustomLabel = (props) => {
+  const { active } = props;
+  console.log(props);
+  const style = {
+    fill: "black",
+    textAnchor: "middle",
+    fontSize: 12,
+  };
+  return active ? (
+    <VictoryLabel text="test" style={style} x={175} y={175} renderInPortal />
+  ) : null;
+};
+
 const PlayerRatingChart = (props) => {
   let data = props.data.comments;
-  // console.log(data);
+  console.log(data);
+  const ratingArray = data.map((d) => d.rating);
 
   let styles = {
     axisOne: {
@@ -25,7 +41,14 @@ const PlayerRatingChart = (props) => {
 
   return (
     <VictoryChart
-      containerComponent={<VictoryContainer responsive={false} />}
+      containerComponent={
+        <VictoryVoronoiContainer
+          labels={({ datum }) => datum.rating}
+          labelComponent={<VictoryTooltip dy={-7} constrainToVisibleArea />}
+          responsive={false}
+          voronoiBlacklist={["scatterDots"]}
+        />
+      }
       width={400}
       height={220}
       minDomain={{ y: 0 }}
@@ -70,23 +93,26 @@ const PlayerRatingChart = (props) => {
           onLoad: { duration: 1000 },
         }}
       />
+
       <VictoryScatter
         name="scatterDots"
         data={data}
         x={(d) => moment.utc(d.date._seconds, "X").format("MMM D")}
         y={(d) => d.rating}
         size={4}
-        // size={({ active }) => (active ? 8 : 4)}
         style={{ data: { fill: "black" } }}
       />
+
       <VictoryLabel
         x={25}
-        y={25}
+        y={20}
         style={{ fontSize: "18px" }}
         text={"Player Rating"}
       />
+
       {/* y-axis */}
       <VictoryAxis dependentAxis style={styles.axisOne} />
+
       {/* x-axis */}
       <VictoryAxis />
     </VictoryChart>

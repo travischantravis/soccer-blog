@@ -20,7 +20,7 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  console.log(player);
+  // console.log(player);
 
   return (
     <div>
