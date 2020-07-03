@@ -3,6 +3,7 @@ import React from "react";
 const MatchStatus = ({ status }) => {
   let color1;
   let letter;
+  let _width = "30px";
 
   if (status === "win") {
     color1 = "#2AD241";
@@ -16,12 +17,13 @@ const MatchStatus = ({ status }) => {
   } else if (status === "upcoming") {
     color1 = "grey";
     letter = "TBC";
+    _width = "40px";
   }
 
   let statusStyle = {
     color: color1,
     backgroundColor: "#EEEEEE",
-    width: "30px",
+    width: _width,
     height: "30px",
     lineHeight: "30px",
     textAlign: "center",

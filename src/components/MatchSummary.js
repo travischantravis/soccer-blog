@@ -23,7 +23,7 @@ const MatchSummary = (props) => {
       </div>
 
       <p className="text-muted row">
-        {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
+        {moment(matchData.date._seconds, "X").format("MMM D, YYYY")}
       </p>
     </div>
   );

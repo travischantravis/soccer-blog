@@ -33,7 +33,7 @@ const MatchDetail = (props) => {
       </h2>
       <p className="row">{matchData.event}</p>
       <p className="text-muted row">
-        {moment.utc(matchData.date._seconds, "X").format("MMM Do YYYY")}
+        {moment(matchData.date._seconds, "X").format("MMM D, YYYY")}
       </p>
       <p className="row">{matchData.match_comment}</p>
       <h3 className="mt-3 row">My rating on players</h3>
