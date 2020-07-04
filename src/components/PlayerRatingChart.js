@@ -92,12 +92,12 @@ const PlayerRatingChart = (props) => {
         }}
       />
 
-      <VictoryLabel
+      {/* <VictoryLabel
         x={25}
         y={20}
         style={{ fontSize: "18px" }}
         text={"Player Rating"}
-      />
+      /> */}
 
       {/* y-axis */}
       <VictoryAxis dependentAxis style={styles.axisOne} />

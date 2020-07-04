@@ -12,6 +12,7 @@ p {
   max-width: 50px;
   max-height: 50px;
   padding: 0;
+  border-radius: 25%;
 }
 
 footer {

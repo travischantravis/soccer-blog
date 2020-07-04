@@ -20,29 +20,47 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  console.log(player);
+  // console.log(player);
 
   return (
     <div>
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-3 player-profile">
+          <Placeholder type="image" />
+
           {isLoading ? (
-            <Placeholder />
+            <Placeholder type="image" />
           ) : (
-            <img
-              src={player.basic.image.replace("40x40", "110x140")}
-              alt="image"
-            />
+            <div
+              style={{ width: "100%", maxHeight: "300px", overflow: "hidden" }}
+            >
+              <img
+                src={player.basic.image.replace("40x40", "110x140")}
+                alt="image"
+                style={{ width: "100%" }}
+              />
+            </div>
           )}
-          <h2>{player.basic.name}</h2>
+          <p style={{ fontSize: "24px" }}>{player.basic.shirt_no} </p>
+
+          <p style={{ fontSize: "24px", fontWeight: "700" }}>
+            {player.basic.name}
+          </p>
+
+          <p style={{ fontSize: "18px", color: "#666" }}>
+            {player.basic.position}
+          </p>
+          <p style={{ fontSize: "18px" }}>{player.basic.nationality}</p>
+        </div>
+        <div className="col-md-9">
+          <h4>Player rating</h4>
+
           {isLoading ? (
             <Placeholder type="match" />
           ) : (
             <PlayerRatingChart data={player} />
           )}
-        </div>
-        <div className="col-md-8">
-          <h4>Player comments</h4>
+          <h4>Player performance</h4>
           {isLoading ? (
             <Placeholder type="match" />
           ) : (

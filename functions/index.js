@@ -17,7 +17,7 @@ app.get("/test", (req, res) => {
   res.send("testing success!");
 });
 
-// [Debug] GET individual matcg from Firestore
+// [Debug] GET individual match from Firestore
 app.get("/api/match/:matchId", (req, res) => {
   const { matchId } = req.params;
   db.collection("match")
@@ -116,7 +116,7 @@ app.get("/api/match/:id/squad", async (req, res) => {
 
 // GET all players
 app.get("/api/players/all", async (req, res) => {
-  const snapshot = await db.collection("players").get();
+  const snapshot = await db.collection("players").orderBy("name").get();
   res.send(snapshot.docs.map((doc) => doc.data()));
 });
 
