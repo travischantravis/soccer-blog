@@ -52,6 +52,22 @@ p {
   margin-right: 15px;
 }
 
+.myform {
+  display: flex;
+  flex-direction: row;
+}
+
+.myform div {
+  margin: 0 10px;
+}
+
+.myform input {
+  border-radius: 5px;
+  border: none;
+  background-color: #eee;
+  padding: 10px;
+}
+
 #add-btn {
   background-color: #eee;
   border: none;

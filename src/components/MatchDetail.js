@@ -5,7 +5,22 @@ import moment from "moment";
 import Placeholder from "./Placeholder";
 
 const CommentAddForm = () => {
-  return <div>form</div>;
+  return (
+    <form action="" className="myform my-3">
+      <div>
+        <input type="text" name="name" placeholder="Name"></input>
+      </div>
+      <div>
+        <input type="text" name="rating" placeholder="Rating" size="5"></input>
+      </div>
+      <div>
+        <input type="text" name="comment" placeholder="Comments"></input>
+      </div>
+      <div>
+        <input type="submit" text="Add" />
+      </div>
+    </form>
+  );
 };
 
 const MatchDetail = (props) => {
@@ -55,10 +70,11 @@ const MatchDetail = (props) => {
         <h3 className="mr-3" style={{ display: "inline" }}>
           My rating on players
         </h3>
-        <button id="add-btn" hidden="true" onClick={addButtonClick}>
+        <button id="add-btn" onClick={addButtonClick}>
           Add
         </button>
       </div>
+
       {showForm ? <CommentAddForm /> : null}
 
       {isLoading ? (
@@ -98,7 +114,10 @@ const MatchDetail = (props) => {
               >
                 <div className="">{player.rating || "-"}/10</div>
               </div>
-              <div className="col-12 col-md-7">
+              <div
+                className="col-12 col-md-7"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <span className="">{player.comment || "-"}</span>
               </div>
             </div>
