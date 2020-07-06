@@ -11,8 +11,15 @@ p {
 .player-pic {
   max-width: 50px;
   max-height: 50px;
-  padding: 0;
   border-radius: 25%;
+  margin-right: 15px;
+}
+
+#add-btn {
+  background-color: #eee;
+  border: none;
+  width: 60px;
+  border-radius: 10px;
 }
 
 footer {

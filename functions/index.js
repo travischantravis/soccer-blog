@@ -120,5 +120,24 @@ app.get("/api/players/all", async (req, res) => {
   res.send(snapshot.docs.map((doc) => doc.data()));
 });
 
+// Add player comments to a match
+app.post("/api/match/:id/add", async (req, res) => {
+  const matchId = req.params.id;
+  // console.log(req.body);
+  const commentData = {
+    rating: req.body.rating,
+    player_id: req.body.player_id,
+    comment: req.body.comment,
+    match_id: matchId,
+  };
+
+  db.collection("match")
+    .doc(matchId)
+    .collection("chelsea_squad")
+    .add(commentData)
+    .then(() => res.send("success add"))
+    .catch((err) => console.log("Cannot add comment", err));
+});
+
 exports.app = functions.https.onRequest(app);
 // soccer-blog-723a1.firebaseapp.com
