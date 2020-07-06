@@ -21,7 +21,9 @@ const MatchList = () => {
 
   return (
     <div>
-      <h5 className="row">Most recent matches of Chelsea</h5>
+      <div className="row">
+        <h5 className="col-12">Most recent matches of Chelsea</h5>
+      </div>
       {isLoading ? (
         <Placeholder count={3} type="match" />
       ) : (

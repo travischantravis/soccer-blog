@@ -30,6 +30,7 @@ const MatchStatus = ({ status }) => {
     borderRadius: "5px",
     marginRight: "5px",
     fontWeight: "700",
+    display: "inline-block",
   };
   return <div style={statusStyle}>{letter}</div>;
 };

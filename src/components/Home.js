@@ -4,9 +4,9 @@ import MatchList from "./MatchList";
 
 const Home = () => {
   return (
-    <div>
+    <React.Fragment>
       <MatchList />
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -12,7 +12,6 @@ const Main = () => {
     <div className="container" style={{ minHeight: "75vh" }}>
       <Route exact path="/" component={Home} />
       <Route path={"/match/:uid"} component={MatchDetail}></Route>
-      <Route path={"/match/:uid/ediit"} component={MatchDetail}></Route>
       <Route path={"/players"} component={PlayerList}></Route>
       <Route path={"/player/:uid"} component={PlayerDetail}></Route>
       <Route path={"/memories"} component={MemoryList}></Route>

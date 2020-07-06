@@ -48,13 +48,14 @@ const MatchDetail = (props) => {
           {moment(matchData.date._seconds, "X").format("MMM D, YYYY")}
         </p>
       </div>
-
-      <p className="row">{matchData.match_comment}</p>
+      <div className="row">
+        <p className="col-12">{matchData.match_comment}</p>
+      </div>
       <div className="mt-3 ">
         <h3 className="mr-3" style={{ display: "inline" }}>
           My rating on players
         </h3>
-        <button id="add-btn" onClick={addButtonClick}>
+        <button id="add-btn" hidden="true" onClick={addButtonClick}>
           Add
         </button>
       </div>
@@ -66,13 +67,20 @@ const MatchDetail = (props) => {
         playersInfo.map((player, i) => {
           return (
             <div key={i} className="my-2 row">
-              <div className="col-8 col-md-4">
+              <div
+                className="col-2 col-md-1"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <img
                   src={player.image}
                   alt={player.name}
                   className="player-pic"
                 />
-
+              </div>
+              <div
+                className="col-6 col-md-3"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <Link
                   to={{
                     pathname: "/player/" + player.player_id,

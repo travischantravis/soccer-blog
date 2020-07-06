@@ -36,6 +36,8 @@ const Placeholder = (props) => {
         return <MatchPlaceholder key={i} />;
       case "image":
         return <ImagePlaceholder key={i} />;
+      default:
+        return null;
     }
   });
 };

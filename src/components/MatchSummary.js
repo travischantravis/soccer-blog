@@ -9,20 +9,20 @@ const MatchSummary = (props) => {
   // console.log(matchData);
   return (
     <div className="mb-3">
-      <div className="row">
+      <div className="">
         <MatchStatus status={matchData.status} />
         <Link
           to={{ pathname: "/match/" + matchData.id, state: matchData }}
           style={{ textDecoration: "none", color: "black", lineHeight: "30px" }}
         >
-          <p>
+          <span>
             {matchData.home} {matchData.home_goal} - {matchData.away_goal}{" "}
             {matchData.away}
-          </p>
+          </span>
         </Link>
       </div>
 
-      <p className="text-muted row">
+      <p className="text-muted">
         {moment(matchData.date._seconds, "X").format("MMM D, YYYY")}
       </p>
     </div>

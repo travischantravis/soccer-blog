@@ -9,20 +9,28 @@ const PlayerSummary = (props) => {
 
   return (
     <div className="my-2 row">
-      <img
-        src={playerData.image}
-        alt={playerData.name}
-        className="player-pic col-2 col-md-2"
-      />
+      <div className="col-2 col-md-1">
+        <img
+          src={playerData.image}
+          alt={playerData.name}
+          className="player-pic"
+        />
+      </div>
+
       <Link
         to={{
           pathname: "/player/" + playerData.p_id,
           state: compatiblePlayerData,
         }}
-        style={{ textDecoration: "none", color: "black", lineHeight: "30px" }}
-        className="col"
+        style={{
+          textDecoration: "none",
+          color: "black",
+          display: "flex",
+          alignItems: "center",
+        }}
+        className="col ml-3"
       >
-        <p>{playerData.name}</p>
+        <span>{playerData.name}</span>
       </Link>
     </div>
   );

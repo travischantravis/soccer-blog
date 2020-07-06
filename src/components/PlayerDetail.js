@@ -36,7 +36,7 @@ const PlayerDetail = (props) => {
             >
               <img
                 src={player.basic.image.replace("40x40", "110x140")}
-                alt="image"
+                alt={player.basic.name}
                 style={{ width: "100%" }}
               />
             </div>

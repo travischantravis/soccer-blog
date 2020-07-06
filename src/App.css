@@ -8,6 +8,43 @@ p {
   margin: 0px;
 }
 
+#navbar {
+  background-color: #f1f1f1;
+  height: 70px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
+}
+
+#navbar-brand {
+  width: initial;
+  text-decoration: none;
+  color: black;
+}
+
+#navbar-brand h2 {
+  text-align: unset;
+}
+
+#navbar-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: grey;
+  margin: 0 10px 0 10px;
+}
+
+.navbar-link:hover {
+  text-decoration: none;
+  color: #666;
+}
+
 .player-pic {
   max-width: 50px;
   max-height: 50px;
@@ -26,4 +63,28 @@ footer {
   margin-top: 50px;
   height: 50px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  #navbar {
+    display: block;
+    padding: 10px 0 0 0;
+    height: 90px;
+  }
+
+  #navbar-brand {
+    width: 100%;
+  }
+
+  #navbar-brand h2 {
+    text-align: center;
+  }
+
+  #navbar-links {
+    justify-content: space-evenly;
+  }
+
+  .navbar-link {
+    margin: 0;
+  }
 }
