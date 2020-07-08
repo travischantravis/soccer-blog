@@ -3,10 +3,15 @@ const async = require("express-async-await");
 const express = require("express");
 const path = require("path");
 const admin = require("firebase-admin");
+const bodyParser = require("body-parser");
 
 // Express
 const app = express();
 app.use(express.json());
+var jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // Firestore initialization
 admin.initializeApp();
@@ -121,15 +126,18 @@ app.get("/api/players/all", async (req, res) => {
 });
 
 // Add player comments to a match
-app.post("/api/match/:id/add", async (req, res) => {
+app.post("/api/match/:id/add", jsonParser, async (req, res) => {
   const matchId = req.params.id;
-  // console.log(req.body);
+  console.log(req.body);
+  console.log(req.body["rating"]);
+  console.log(req.body.comment);
   const commentData = {
     rating: req.body.rating,
     player_id: req.body.player_id,
     comment: req.body.comment,
     match_id: matchId,
   };
+  console.log(commentData);
 
   db.collection("match")
     .doc(matchId)
