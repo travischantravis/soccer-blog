@@ -138,7 +138,7 @@ app.post("/api/match/:id/add", (req, res) => {
     .doc(matchId)
     .collection("chelsea_squad")
     .add(commentData)
-    .then(() => res.send("success add"))
+    .then(() => res.send({ msg: "success add" }))
     .catch((err) => console.log("Cannot add comment", err));
 });
 
