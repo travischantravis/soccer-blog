@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-const AddCommentForm = () => {
+const AddCommentForm = (props) => {
+  const { match_id } = props;
   const [players, setPlayers] = useState([]);
-  const [form, setForm] = useState({ player_id: " ", rating: 0, comment: "" });
+  const [form, setForm] = useState({
+    player_id: "",
+    rating: 0,
+    comment: "",
+    match_id: match_id,
+  });
 
   useEffect(() => {
     fetch("/api/players/all")
@@ -11,7 +17,9 @@ const AddCommentForm = () => {
       })
       .then((data) => {
         setPlayers(data);
-        console.log(data);
+        // Default value for dropdown list
+        setForm({ player_id: data[0].p_id, match_id: match_id });
+        // console.log(data);
       });
   }, []);
 
@@ -20,11 +28,31 @@ const AddCommentForm = () => {
     const { name } = target;
     // console.log(target.name);
     // console.log(target.value);
-    setForm({ [name]: target.value });
+    setForm((prev) => {
+      return { ...prev, [name]: target.value };
+    });
     // console.log(form);
   };
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(form);
+    fetch("/api/match/" + match_id + "/add", {
+      method: "POST",
+      body: JSON.stringify(form),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.msg);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <form className="myform my-3" onSubmit={handleSubmit}>
@@ -40,10 +68,13 @@ const AddCommentForm = () => {
       </div>
       <div>
         <input
-          type="text"
+          type="number"
           name="rating"
           placeholder="Rating"
-          size="5"
+          id="inputRating"
+          step="0.1"
+          min="0"
+          max="10"
           onChange={handleInputChange}
         ></input>
       </div>
@@ -51,7 +82,7 @@ const AddCommentForm = () => {
         <input
           type="text"
           name="comment"
-          placeholder="Comments"
+          placeholder="Comment"
           onChange={handleInputChange}
         ></input>
       </div>

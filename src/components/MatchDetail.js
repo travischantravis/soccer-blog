@@ -15,7 +15,6 @@ const MatchDetail = (props) => {
   // console.log(matchData);
 
   const addButtonClick = () => {
-    // Toggle visibility
     setShowForm(!showForm);
   };
 
@@ -56,7 +55,7 @@ const MatchDetail = (props) => {
         </button>
       </div>
 
-      {showForm ? <AddCommentForm /> : null}
+      {showForm ? <AddCommentForm match_id={matchId} /> : null}
 
       {isLoading ? (
         <Placeholder count={4} type="match" />

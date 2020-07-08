@@ -72,6 +72,10 @@ p {
   min-width: 160px;
 }
 
+.myform #inputRating {
+  min-width: 80px;
+}
+
 #add-btn {
   background-color: #eee;
   border: none;
