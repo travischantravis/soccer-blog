@@ -8,10 +8,8 @@ const bodyParser = require("body-parser");
 // Express
 const app = express();
 app.use(express.json());
-var jsonParser = bodyParser.json();
-
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+// app.use(bodyParser.json());
+// const jsonParser = bodyParser.json();
 
 // Firestore initialization
 admin.initializeApp();
@@ -67,9 +65,9 @@ app.get("/api/player/detail/:uid", async (req, res) => {
       })
     );
 
-    // 5. Sort in descending date
+    // [5]. Sort
     const _combinedCommentInfo = await combinedCommentInfo.sort((a, b) =>
-      a.date._seconds < b.date._seconds ? 1 : -1
+      a.date._seconds > b.date._seconds ? 1 : -1
     );
 
     // 6. Combine all info
@@ -126,13 +124,10 @@ app.get("/api/players/all", async (req, res) => {
 });
 
 // Add player comments to a match
-app.post("/api/match/:id/add", jsonParser, async (req, res) => {
+app.post("/api/match/:id/add", (req, res) => {
   const matchId = req.params.id;
-  console.log(req.body);
-  console.log(req.body["rating"]);
-  console.log(req.body.comment);
   const commentData = {
-    rating: req.body.rating,
+    rating: parseFloat(req.body.rating),
     player_id: req.body.player_id,
     comment: req.body.comment,
     match_id: matchId,
