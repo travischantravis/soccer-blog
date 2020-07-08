@@ -3,25 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 import Placeholder from "./Placeholder";
-
-const CommentAddForm = () => {
-  return (
-    <form action="" className="myform my-3">
-      <div>
-        <input type="text" name="name" placeholder="Name"></input>
-      </div>
-      <div>
-        <input type="text" name="rating" placeholder="Rating" size="5"></input>
-      </div>
-      <div>
-        <input type="text" name="comment" placeholder="Comments"></input>
-      </div>
-      <div>
-        <input type="submit" text="Add" />
-      </div>
-    </form>
-  );
-};
+import AddCommentForm from "./AddCommentForm";
 
 const MatchDetail = (props) => {
   const [playersInfo, setPlayersInfo] = useState([]);
@@ -29,12 +11,11 @@ const MatchDetail = (props) => {
   const [showForm, setShowForm] = useState(false);
 
   const matchData = props.location.state;
-  // const matchId = matchData.id;
   const matchId = props.match.params.uid;
   // console.log(matchData);
 
   const addButtonClick = () => {
-    // Toggle
+    // Toggle visibility
     setShowForm(!showForm);
   };
 
@@ -75,7 +56,7 @@ const MatchDetail = (props) => {
         </button>
       </div>
 
-      {showForm ? <CommentAddForm /> : null}
+      {showForm ? <AddCommentForm /> : null}
 
       {isLoading ? (
         <Placeholder count={4} type="match" />

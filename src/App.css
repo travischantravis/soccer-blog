@@ -68,6 +68,10 @@ p {
   padding: 10px;
 }
 
+.myform select {
+  min-width: 160px;
+}
+
 #add-btn {
   background-color: #eee;
   border: none;
