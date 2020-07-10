@@ -147,5 +147,11 @@ app.post("/api/match/:id/add", (req, res) => {
     .catch((err) => console.log({ msg: `Cannot add comment: ${err}` }));
 });
 
+// GET all formations
+app.get("/api/formations/all", async (req, res) => {
+  const snapshot = await db.collection("formation").get();
+  res.send(snapshot.docs.map((doc) => doc.data()));
+});
+
 exports.app = functions.https.onRequest(app);
 // soccer-blog-723a1.firebaseapp.com

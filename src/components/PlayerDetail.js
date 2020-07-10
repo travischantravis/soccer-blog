@@ -4,6 +4,16 @@ import moment from "moment";
 import PlayerRatingChart from "./PlayerRatingChart";
 import Placeholder from "./Placeholder";
 
+const CalculateAge = (dob) => {
+  if (dob) {
+    const seconds = dob._seconds;
+    var diff_ms = Date.now() - seconds * 1000; // milliseconds
+    var age_dt = new Date(diff_ms);
+
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  }
+};
+
 // Pass player_id as the only prop
 const PlayerDetail = (props) => {
   const playerId = props.location.state.player_id;
@@ -20,7 +30,7 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  // console.log(player);
+  console.log(player);
 
   return (
     <div>
@@ -51,6 +61,15 @@ const PlayerDetail = (props) => {
             {player.basic.position}
           </p>
           <p style={{ fontSize: "18px" }}>{player.basic.nationality}</p>
+          <p>
+            {player.basic.dob &&
+              moment
+                .utc(player.basic.dob._seconds, "X")
+                .format("MMM D, YYYY")}{" "}
+            <span className="text-muted">
+              [{CalculateAge(player.basic.dob)}]
+            </span>
+          </p>
         </div>
         <div className="col-md-9">
           <h4>Player rating</h4>

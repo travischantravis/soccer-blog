@@ -30,6 +30,13 @@ const Header = () => {
         >
           <span>Memories</span>
         </NavLink>
+        <NavLink
+          to="/formations"
+          className="navbar-link"
+          activeClassName="nav-selected"
+        >
+          <span>Formations</span>
+        </NavLink>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import PlayerDetail from "./components/PlayerDetail";
 import PlayerList from "./components/PlayerList";
 import Home from "./components/Home";
 import MemoryList from "./components/MemoryList";
+import Formation from "./components/Formation";
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
       <Route path={"/players"} component={PlayerList}></Route>
       <Route path={"/player/:uid"} component={PlayerDetail}></Route>
       <Route path={"/memories"} component={MemoryList}></Route>
+      <Route path={"/formations"} component={Formation}></Route>
     </div>
   );
 };
