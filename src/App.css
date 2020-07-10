@@ -101,7 +101,7 @@ p {
 .drag-box {
   width: 25px;
   height: 25px;
-  background-color: rgb(42, 73, 207);
+  background-color: #2a49cf;
   border-radius: 50%;
   color: #fff;
   font-size: 12px;
