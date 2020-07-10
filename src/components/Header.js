@@ -1,22 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
     <div id="navbar">
-      <Link to="/" id="navbar-brand">
+      <NavLink to="/" id="navbar-brand">
         <h2>Travis' Soccer Blog</h2>
-      </Link>
+      </NavLink>
       <div id="navbar-links">
-        <Link to="/" className="navbar-link">
+        <NavLink
+          exact
+          to="/"
+          className="navbar-link"
+          activeClassName="nav-selected"
+        >
           <span>Matches</span>
-        </Link>
-        <Link to="/players" className="navbar-link">
+        </NavLink>
+        <NavLink
+          to="/players"
+          className="navbar-link"
+          activeClassName="nav-selected"
+        >
           <span>Players</span>
-        </Link>
-        <Link to="/memories" className="navbar-link">
+        </NavLink>
+        <NavLink
+          to="/memories"
+          className="navbar-link"
+          activeClassName="nav-selected"
+        >
           <span>Memories</span>
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

@@ -45,6 +45,10 @@ p {
   color: #666;
 }
 
+.nav-selected {
+  color: #555;
+}
+
 .player-pic {
   max-width: 50px;
   max-height: 50px;
