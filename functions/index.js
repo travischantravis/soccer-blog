@@ -98,6 +98,11 @@ app.get("/api/match/:id/squad", async (req, res) => {
     .get();
   const squadComment = squadCommentRef.docs.map((doc) => doc.data());
 
+  // let squadComment;
+  // db.collection("match/" + id + "/chelsea_squad").onSnapshot((doc) => {
+  //   squadComment.push(doc.data());
+  // });
+
   // 2. GET basic information of the players presented in the match
   const playerCombinedInfo = await Promise.all(
     squadComment.map(async (d) => {
@@ -139,7 +144,7 @@ app.post("/api/match/:id/add", (req, res) => {
     .collection("chelsea_squad")
     .add(commentData)
     .then(() => res.send({ msg: "success add" }))
-    .catch((err) => console.log("Cannot add comment", err));
+    .catch((err) => console.log({ msg: `Cannot add comment: ${err}` }));
 });
 
 exports.app = functions.https.onRequest(app);

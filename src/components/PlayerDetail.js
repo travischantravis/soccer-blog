@@ -55,11 +55,13 @@ const PlayerDetail = (props) => {
         <div className="col-md-9">
           <h4>Player rating</h4>
 
-          {isLoading ? (
-            <Placeholder type="match" />
-          ) : (
-            <PlayerRatingChart data={player} />
-          )}
+          <div style={{ overflowX: "auto" }}>
+            {isLoading ? (
+              <Placeholder type="match" />
+            ) : (
+              <PlayerRatingChart data={player} />
+            )}
+          </div>
           <h4>Player performance</h4>
           {isLoading ? (
             <Placeholder type="match" />
