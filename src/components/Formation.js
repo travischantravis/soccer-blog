@@ -3,7 +3,7 @@ import Draggable from "react-draggable";
 
 const posColor = (pos) => {
   const lastChar = pos.charAt(pos.length - 1);
-  console.log(lastChar);
+  // console.log(lastChar);
   switch (lastChar) {
     case "K":
       return "#cebf3b";

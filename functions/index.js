@@ -149,8 +149,26 @@ app.post("/api/match/:id/add", (req, res) => {
 
 // GET all formations
 app.get("/api/formations/all", async (req, res) => {
-  const snapshot = await db.collection("formation").get();
-  res.send(snapshot.docs.map((doc) => doc.data()));
+  const formationsRef = await db.collection("formation").get();
+  const formations = formationsRef.docs.map((doc) => doc.data());
+
+  const formationsCombinedInfo = await Promise.all(
+    formations.map(async (formation) => {
+      return formation.positions.map(async (position) => {
+        const playerInfoRef = await db
+          .collection("players/")
+          .doc(position.player_id)
+          .get();
+        const playerInfo = playerInfoRef.data();
+        // console.log(playerInfo);
+        // 3. Combine the two objects
+        console.log(Object.assign(position, playerInfo));
+        return Object.assign(position, playerInfo);
+      });
+    })
+  );
+
+  res.send(formationsCombinedInfo);
 });
 
 exports.app = functions.https.onRequest(app);
