@@ -23,13 +23,13 @@ const Header = () => {
         >
           <span>Players</span>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/memories"
           className="navbar-link"
           activeClassName="nav-selected"
         >
           <span>Memories</span>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/formations"
           className="navbar-link"

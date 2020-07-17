@@ -154,21 +154,26 @@ app.get("/api/formations/all", async (req, res) => {
 
   const formationsCombinedInfo = await Promise.all(
     formations.map(async (formation) => {
-      return formation.positions.map(async (position) => {
-        const playerInfoRef = await db
-          .collection("players/")
-          .doc(position.player_id)
-          .get();
-        const playerInfo = playerInfoRef.data();
-        // console.log(playerInfo);
-        // 3. Combine the two objects
-        console.log(Object.assign(position, playerInfo));
-        return Object.assign(position, playerInfo);
-      });
+      const combinedPosition = await Promise.all(
+        formation.positions.map(async (position) => {
+          const playerInfoRef = await db
+            .collection("players/")
+            .doc(position.player_id)
+            .get();
+          const playerInfo = playerInfoRef.data();
+
+          // 3. Combine the two objects
+          return Object.assign(position, playerInfo);
+        })
+      );
+
+      // 4. Formation now contain formation info and each position info
+      return formation;
     })
   );
-
-  res.send(formationsCombinedInfo);
+  // console.log(formations);
+  res.send(formations);
+  // res.send(formationsCombinedInfo);
 });
 
 exports.app = functions.https.onRequest(app);

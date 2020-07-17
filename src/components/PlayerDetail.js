@@ -30,7 +30,7 @@ const PlayerDetail = (props) => {
         setIsLoading(false);
       });
   }, []);
-  console.log(player);
+  // console.log(player);
 
   return (
     <div>
@@ -67,7 +67,7 @@ const PlayerDetail = (props) => {
                 .utc(player.basic.dob._seconds, "X")
                 .format("MMM D, YYYY")}{" "}
             <span className="text-muted">
-              [{CalculateAge(player.basic.dob)}]
+              {isLoading ? null : "[" + CalculateAge(player.basic.dob) + "]"}
             </span>
           </p>
         </div>

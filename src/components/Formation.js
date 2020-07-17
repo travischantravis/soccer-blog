@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
+import LastName from "../functions/LastName";
 
 const posColor = (pos) => {
   const lastChar = pos.charAt(pos.length - 1);
@@ -28,18 +29,19 @@ const Formation = () => {
       })
       .then((data) => {
         setFormations(data);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 
   return (
     <div>
-      <h5>2019/2020 Formation</h5>
       {formations &&
         formations.map((d, i) => {
           return (
             <div key={i}>
-              <h6>{d.name}</h6>
+              <h5>{d.season} Formation</h5>
+
+              <h6>{d.formation_name}</h6>
               <div id="soccer-field">
                 {d.positions &&
                   d.positions.map((pos, i) => {
@@ -54,7 +56,7 @@ const Formation = () => {
                           className="drag-box"
                           style={{ backgroundColor: posColor(pos.name) }}
                         >
-                          <span>{pos.name}</span>
+                          <span>{LastName(pos.name)}</span>
                         </div>
                       </Draggable>
                     );

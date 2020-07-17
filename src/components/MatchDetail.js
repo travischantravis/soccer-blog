@@ -50,7 +50,7 @@ const MatchDetail = (props) => {
         <h3 className="mr-3" style={{ display: "inline" }}>
           My rating on players
         </h3>
-        {/* Comment this for production */}
+        {/* TODO Comment this for production */}
         <button id="add-btn" onClick={addButtonClick}>
           Add
         </button>
