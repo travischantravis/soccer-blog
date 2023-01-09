@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-async-await": "^1.1.0",
     "firebase": "^7.15.5",
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.6.1",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7"
